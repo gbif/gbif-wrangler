@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ~ Copyright 2012 Global Biodiversity Information Facility (GBIF) ~ ~ 
+  Licensed under the Apache License, Version 2.0 (the "License"); ~ you may 
+  not use this file except in compliance with the License. ~ You may obtain 
+  a copy of the License at ~ ~ http://www.apache.org/licenses/LICENSE-2.0 ~ 
+  ~ Unless required by applicable law or agreed to in writing, software ~ distributed 
+  under the License is distributed on an "AS IS" BASIS, ~ WITHOUT WARRANTIES 
+  OR CONDITIONS OF ANY KIND, either express or implied. ~ See the License for 
+  the specific language governing permissions and ~ limitations under the License. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.gbif</groupId>
+    <artifactId>motherpom</artifactId>
+    <version>10</version>
+  </parent>
+
+  <artifactId>gbif-wrangler</artifactId>
+  <version>0.1-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>GBIF Wrangler :: Common coordination utilities</name>
+  <description>Provides common classes to manage locks, distributed counters and common coordination services</description>
+
+  <properties>
+    <guava.version>13.0.1</guava.version>
+    <guice.version>3.0</guice.version>
+    <zookeeper.version>3.4.5</zookeeper.version>
+    <curator.version>1.3.3</curator.version>
+    <jsr305.version>2.0.0</jsr305.version>
+    <slf4j-api.version>1.7.5</slf4j-api.version>
+    <logback.version>1.0.9</logback.version>
+    <!-- Testing -->
+    <junit.version>4.10</junit.version>
+    <fest.version>2.0M10</fest.version>
+  </properties>
+
+  <repositories>
+    <repository>
+      <id>gbif-all</id>
+      <url>http://repository.gbif.org/content/groups/gbif</url>
+    </repository>
+    <repository>
+      <id>gbif-thirdparty</id>
+      <url>http://repository.gbif.org/content/repositories/thirdparty</url>
+    </repository>
+    <repository>
+      <id>cloudera</id>
+      <url>https://repository.cloudera.com/content/repositories/releases/</url>
+      <snapshots>
+        <enabled>true</enabled>
+        <updatePolicy>always</updatePolicy>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+    </repository>    
+  </repositories>
+
+  <dependencies>
+    <!-- Direct dependencies -->
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>${guava.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>com.google.inject</groupId>
+        <artifactId>guice</artifactId>
+        <version>${guice.version}</version>
+      </dependency>    
+    <dependency>
+      <groupId>com.netflix.curator</groupId>
+      <artifactId>curator-client</artifactId>
+      <version>${curator.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.netflix.curator</groupId>
+      <artifactId>curator-framework</artifactId>
+      <version>${curator.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.netflix.curator</groupId>
+      <artifactId>curator-recipes</artifactId>
+      <version>${curator.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.zookeeper</groupId>
+      <artifactId>zookeeper</artifactId>
+      <version>${zookeeper.version}</version>
+      <scope>runtime</scope>
+      <exclusions>
+        <!-- We need to exclude these because they live in a legacy repository (Maven 1)
+             and that isn't supported by Maven 3 anymore -->
+        <exclusion>
+          <artifactId>jms</artifactId>
+          <groupId>javax.jms</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>jmxtools</artifactId>
+          <groupId>com.sun.jdmk</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>jmxri</artifactId>
+          <groupId>com.sun.jmx</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>${slf4j-api.version}</version>
+    </dependency>    
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>jsr305</artifactId>
+      <version>${jsr305.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    
+    <!-- testing -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.easytesting</groupId>
+      <artifactId>fest-assert-core</artifactId>
+      <version>${fest.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+</project>
