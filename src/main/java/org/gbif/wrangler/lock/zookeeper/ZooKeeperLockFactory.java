@@ -29,6 +29,9 @@ public class ZooKeeperLockFactory implements LockFactory {
 
     private Lease lease;
 
+    /**
+     * Private default constructor.
+     */
     private ZooKeeperLock(InterProcessSemaphoreV2 semaphore) {
       this.semaphore = semaphore;
     }
@@ -80,15 +83,21 @@ public class ZooKeeperLockFactory implements LockFactory {
 
   private final int maxLeases;
 
+  /**
+   * Full constructor.
+   */
   public ZooKeeperLockFactory(CuratorFramework curator, int maxLeases, String lockingPath) {
     this.curator = checkNotNull(curator, "curator can't be null");
     checkArgument(curator.getState() == CuratorFrameworkState.STARTED, "curator has to be started");
-
     checkArgument(maxLeases > 0, "maxLeases has to be greater than zero");
+
     this.maxLeases = maxLeases;
     this.lockingPath = lockingPath;
   }
 
+  /**
+   * Crates an instance of the LockFactory with default number of leases of 1.
+   */
   public ZooKeeperLockFactory(CuratorFramework curator, String lockingPath) {
     this(curator, DEFAULT_LEASES, lockingPath);
   }
