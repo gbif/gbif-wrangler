@@ -23,6 +23,7 @@
 
   <name>GBIF Wrangler :: Common coordination utilities</name>
   <description>Provides common classes to manage locks, distributed counters and common coordination services</description>
+  <url>http://sites.gbif.org/common-resources/gbif-wrangler</url>
 
   <properties>
     <guava.version>13.0.1</guava.version>
@@ -37,6 +38,30 @@
     <fest.version>2.0M10</fest.version>
   </properties>
 
+
+  <scm>
+    <connection>scm:svn:http://gbif-common-resources.googlecode.com/svn/gbif-wrangler/trunk</connection>
+    <developerConnection>scm:svn:https://gbif-common-resources.googlecode.com/svn/gbif-wrangler/trunk</developerConnection>
+    <url>http://code.google.com/p/gbif-common-resources/source/browse/#svn/gbif-wrangler/trunk</url>
+  </scm>
+
+  <issueManagement>
+    <system>JIRA</system>
+    <url>http://dev.gbif.org/issues/browse/GBIFCOM</url>
+  </issueManagement>
+
+  <ciManagement>
+    <system>jenkins</system>
+    <url>http://builds.gbif.org/job/gbif-wrangler</url>
+  </ciManagement>
+
+  <distributionManagement>
+    <site>
+      <id>gbif-site</id>
+      <name>Site for the project</name>
+      <url>scp://tools.gbif.org:/var/www/html/sites/common-resources/gbif-wrangler</url>
+    </site>
+  </distributionManagement>
   <repositories>
     <repository>
       <id>gbif-all</id>
@@ -56,7 +81,7 @@
       <releases>
         <enabled>true</enabled>
       </releases>
-    </repository>    
+    </repository>
   </repositories>
 
   <dependencies>
@@ -67,10 +92,10 @@
       <version>${guava.version}</version>
     </dependency>
     <dependency>
-        <groupId>com.google.inject</groupId>
-        <artifactId>guice</artifactId>
-        <version>${guice.version}</version>
-      </dependency>    
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+      <version>${guice.version}</version>
+    </dependency>
     <dependency>
       <groupId>com.netflix.curator</groupId>
       <artifactId>curator-client</artifactId>
@@ -92,8 +117,8 @@
       <version>${zookeeper.version}</version>
       <scope>runtime</scope>
       <exclusions>
-        <!-- We need to exclude these because they live in a legacy repository (Maven 1)
-             and that isn't supported by Maven 3 anymore -->
+        <!-- We need to exclude these because they live in a legacy repository 
+          (Maven 1) and that isn't supported by Maven 3 anymore -->
         <exclusion>
           <artifactId>jms</artifactId>
           <groupId>javax.jms</groupId>
@@ -112,7 +137,7 @@
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
       <version>${slf4j-api.version}</version>
-    </dependency>    
+    </dependency>
     <dependency>
       <groupId>com.google.code.findbugs</groupId>
       <artifactId>jsr305</artifactId>
@@ -124,7 +149,7 @@
       <version>${logback.version}</version>
       <scope>runtime</scope>
     </dependency>
-    
+
     <!-- testing -->
     <dependency>
       <groupId>junit</groupId>
