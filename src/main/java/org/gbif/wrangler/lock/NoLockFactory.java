@@ -33,7 +33,7 @@ public class NoLockFactory implements LockFactory {
 
     @Override
     public void lock() {
-    //do nothing
+      //do nothing
     }
 
     @Override
@@ -48,7 +48,7 @@ public class NoLockFactory implements LockFactory {
 
     @Override
     public void unlock() {
-    //do nothing
+      //do nothing
     }
   }
 }

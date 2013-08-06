@@ -6,10 +6,10 @@ import org.gbif.wrangler.lock.LockingException;
 
 import java.util.concurrent.TimeUnit;
 
-import com.netflix.curator.framework.CuratorFramework;
-import com.netflix.curator.framework.imps.CuratorFrameworkState;
-import com.netflix.curator.framework.recipes.locks.InterProcessSemaphoreV2;
-import com.netflix.curator.framework.recipes.locks.Lease;
+import org.apache.curator.framework.CuratorFramework;
+import org.apache.curator.framework.imps.CuratorFrameworkState;
+import org.apache.curator.framework.recipes.locks.InterProcessSemaphoreV2;
+import org.apache.curator.framework.recipes.locks.Lease;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -23,10 +23,48 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 public class ZooKeeperLockFactory implements LockFactory {
 
+  private static final int DEFAULT_LEASES = 1;
+  private final String lockingPath;
+  private final CuratorFramework curator;
+  private final int maxLeases;
+
+  /**
+   * Full constructor.
+   */
+  public ZooKeeperLockFactory(CuratorFramework curator, int maxLeases, String lockingPath) {
+    this.curator = checkNotNull(curator, "curator can't be null");
+    checkArgument(curator.getState() == CuratorFrameworkState.STARTED, "curator has to be started");
+    checkArgument(maxLeases > 0, "maxLeases has to be greater than zero");
+
+    this.maxLeases = maxLeases;
+    this.lockingPath = lockingPath;
+  }
+
+  /**
+   * Crates an instance of the LockFactory with default number of leases of 1.
+   */
+  public ZooKeeperLockFactory(CuratorFramework curator, String lockingPath) {
+    this(curator, DEFAULT_LEASES, lockingPath);
+  }
+
+  @Override
+  public void clearLock(String name) {
+    try {
+      curator.delete().forPath(lockingPath + name);
+    } catch (Exception e) {
+      throw new LockingException(e);
+    }
+  }
+
+  @Override
+  public Lock makeLock(String name) {
+    InterProcessSemaphoreV2 semaphore = new InterProcessSemaphoreV2(curator, lockingPath + name, maxLeases);
+    return new ZooKeeperLock(semaphore);
+  }
+
   private static class ZooKeeperLock implements Lock {
 
     private final InterProcessSemaphoreV2 semaphore;
-
     private Lease lease;
 
     /**
@@ -73,47 +111,5 @@ public class ZooKeeperLockFactory implements LockFactory {
         throw new LockingException(e);
       }
     }
-  }
-
-  private static final int DEFAULT_LEASES = 1;
-
-  private final String lockingPath;
-
-  private final CuratorFramework curator;
-
-  private final int maxLeases;
-
-  /**
-   * Full constructor.
-   */
-  public ZooKeeperLockFactory(CuratorFramework curator, int maxLeases, String lockingPath) {
-    this.curator = checkNotNull(curator, "curator can't be null");
-    checkArgument(curator.getState() == CuratorFrameworkState.STARTED, "curator has to be started");
-    checkArgument(maxLeases > 0, "maxLeases has to be greater than zero");
-
-    this.maxLeases = maxLeases;
-    this.lockingPath = lockingPath;
-  }
-
-  /**
-   * Crates an instance of the LockFactory with default number of leases of 1.
-   */
-  public ZooKeeperLockFactory(CuratorFramework curator, String lockingPath) {
-    this(curator, DEFAULT_LEASES, lockingPath);
-  }
-
-  @Override
-  public void clearLock(String name) {
-    try {
-      curator.delete().forPath(lockingPath + name);
-    } catch (Exception e) {
-      throw new LockingException(e);
-    }
-  }
-
-  @Override
-  public Lock makeLock(String name) {
-    InterProcessSemaphoreV2 semaphore = new InterProcessSemaphoreV2(curator, lockingPath + name, maxLeases);
-    return new ZooKeeperLock(semaphore);
   }
 }
