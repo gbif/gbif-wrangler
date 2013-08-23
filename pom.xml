@@ -17,7 +17,7 @@
   </parent>
 
   <artifactId>gbif-wrangler</artifactId>
-  <version>0.2</version>
+  <version>0.3-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <name>GBIF Wrangler :: Common coordination utilities</name>
@@ -36,9 +36,9 @@
 
 
   <scm>
-    <connection>scm:svn:http://gbif-common-resources.googlecode.com/svn/gbif-wrangler/tags/gbif-wrangler-0.2</connection>
-    <developerConnection>scm:svn:https://gbif-common-resources.googlecode.com/svn/gbif-wrangler/tags/gbif-wrangler-0.2</developerConnection>
-    <url>http://code.google.com/p/gbif-common-resources/source/browse/#svn/gbif-wrangler/tags/gbif-wrangler-0.2</url>
+    <connection>scm:svn:http://gbif-common-resources.googlecode.com/svn/gbif-wrangler/trunk</connection>
+    <developerConnection>scm:svn:https://gbif-common-resources.googlecode.com/svn/gbif-wrangler/trunk</developerConnection>
+    <url>http://code.google.com/p/gbif-common-resources/source/browse/#svn/gbif-wrangler/trunk</url>
   </scm>
 
   <issueManagement>
