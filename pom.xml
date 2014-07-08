@@ -13,7 +13,7 @@
   <parent>
     <groupId>org.gbif</groupId>
     <artifactId>motherpom</artifactId>
-    <version>10</version>
+    <version>17-SNAPSHOT</version>
   </parent>
 
   <artifactId>gbif-wrangler</artifactId>
@@ -36,9 +36,10 @@
 
 
   <scm>
-    <connection>scm:svn:http://gbif-common-resources.googlecode.com/svn/gbif-wrangler/trunk</connection>
-    <developerConnection>scm:svn:https://gbif-common-resources.googlecode.com/svn/gbif-wrangler/trunk</developerConnection>
-    <url>http://code.google.com/p/gbif-common-resources/source/browse/#svn/gbif-wrangler/trunk</url>
+    <connection>scm:git:git@github.com:gbif/gbif-wrangler.git</connection>
+    <developerConnection>scm:git:git@github.com:gbif/gbif-wrangler.git</developerConnection>
+    <url>https://github.com/gbif/gbif-wrangler</url>
+    <tag>HEAD</tag>
   </scm>
 
   <issueManagement>
