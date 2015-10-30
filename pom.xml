@@ -13,7 +13,7 @@
   <parent>
     <groupId>org.gbif</groupId>
     <artifactId>motherpom</artifactId>
-    <version>17-SNAPSHOT</version>
+    <version>24</version>
   </parent>
 
   <artifactId>gbif-wrangler</artifactId>
@@ -27,11 +27,10 @@
   <properties>
     <guava.version>14.0.1</guava.version>
     <zookeeper.version>3.4.5</zookeeper.version>
-    <curator.version>2.1.0-incubating</curator.version>
+    <curator.version>2.9.0</curator.version>
     <jsr305.version>2.0.0</jsr305.version>
     <!-- Testing -->
-    <junit.version>4.11</junit.version>
-    <fest.version>2.0M10</fest.version>
+    <junit.version>4.12</junit.version>
   </properties>
 
 
@@ -127,12 +126,6 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>${junit.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.easytesting</groupId>
-      <artifactId>fest-assert-core</artifactId>
-      <version>${fest.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
