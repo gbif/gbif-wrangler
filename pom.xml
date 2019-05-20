@@ -25,6 +25,8 @@
   <url>http://sites.gbif.org/common-resources/gbif-wrangler</url>
 
   <properties>
+    <jdkLevel>1.8</jdkLevel>
+    <encoding>UTF-8</encoding>
     <guava.version>14.0.1</guava.version>
     <zookeeper.version>3.4.5</zookeeper.version>
     <curator.version>2.9.0</curator.version>
