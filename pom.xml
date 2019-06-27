@@ -17,7 +17,7 @@
   </parent>
 
   <artifactId>gbif-wrangler</artifactId>
-  <version>0.3-SNAPSHOT</version>
+  <version>0.3</version>
   <packaging>jar</packaging>
 
   <name>GBIF Wrangler :: Common coordination utilities</name>
@@ -40,7 +40,7 @@
     <connection>scm:git:git@github.com:gbif/gbif-wrangler.git</connection>
     <developerConnection>scm:git:git@github.com:gbif/gbif-wrangler.git</developerConnection>
     <url>https://github.com/gbif/gbif-wrangler</url>
-    <tag>HEAD</tag>
+    <tag>gbif-wrangler-0.3</tag>
   </scm>
 
   <issueManagement>
