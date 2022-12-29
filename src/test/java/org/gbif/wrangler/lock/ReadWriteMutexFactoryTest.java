@@ -14,9 +14,9 @@ public class ReadWriteMutexFactoryTest {
   /**
    * {@link ReadWriteMutexFactory} that does nothing.
    */
-  private class NoLockReadWriteMutexFactory implements ReadWriteMutexFactory {
+  private static class NoLockReadWriteMutexFactory implements ReadWriteMutexFactory {
 
-    public class NoOpMutex implements Mutex {
+    public static class NoOpMutex implements Mutex {
 
       @Override
       public void acquire() {
@@ -53,9 +53,7 @@ public class ReadWriteMutexFactoryTest {
     ReadWriteMutexFactory factory = new NoLockReadWriteMutexFactory();
     Mutex mutex = factory.createReadMutex("read");
     AtomicInteger atomicInteger = new AtomicInteger(0);
-    mutex.doInLock(() -> {
-      atomicInteger.incrementAndGet();
-    });
+    mutex.doInLock(atomicInteger::incrementAndGet);
     Assert.assertEquals(1, atomicInteger.get());
   }
 }

@@ -36,6 +36,7 @@ public class ZookeeperSharedReadWriteMutex implements ReadWriteMutexFactory {
    *
    * @return a read mutex
    */
+  @Override
   public Mutex createReadMutex(String name) {
     return new ZookeeperMutex(new InterProcessReadWriteLock(curatorFramework, lockingPath + name).readLock());
   }
@@ -47,6 +48,7 @@ public class ZookeeperSharedReadWriteMutex implements ReadWriteMutexFactory {
    *
    * @return a read mutex
    */
+  @Override
   public Mutex createWriteMutex(String name) {
     return new ZookeeperMutex(new InterProcessReadWriteLock(curatorFramework, lockingPath + name).writeLock());
   }
