@@ -13,8 +13,8 @@
  */
 package org.gbif.wrangler.lock;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * LockFactory test class.
@@ -36,7 +36,7 @@ public class NoLockFactoryTest {
     Lock lock1 = lockFactory.makeLock(LOCK_NAME);
     Lock lock2 = lockFactory.makeLock(LOCK_NAME);
 
-    Assert.assertTrue(lock1.tryLock());
-    Assert.assertTrue(lock2.tryLock());
+    Assertions.assertTrue(lock1.tryLock());
+    Assertions.assertTrue(lock2.tryLock());
   }
 }

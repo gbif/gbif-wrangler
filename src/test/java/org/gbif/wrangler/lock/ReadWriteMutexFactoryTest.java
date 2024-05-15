@@ -16,8 +16,8 @@ package org.gbif.wrangler.lock;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test unit for the {@link Mutex} and {@link ReadWriteMutexFactory} classes.
@@ -59,7 +59,7 @@ public class ReadWriteMutexFactoryTest {
   }
 
   /**
-   * Performs a execution using to {@link Mutex#doInLock(Mutex.Action)} method.
+   * Performs an execution using to {@link Mutex#doInLock(Mutex.Action)} method.
    */
   @Test
   public void doInLockTest() {
@@ -67,6 +67,6 @@ public class ReadWriteMutexFactoryTest {
     Mutex mutex = factory.createReadMutex("read");
     AtomicInteger atomicInteger = new AtomicInteger(0);
     mutex.doInLock(atomicInteger::incrementAndGet);
-    Assert.assertEquals(1, atomicInteger.get());
+    Assertions.assertEquals(1, atomicInteger.get());
   }
 }
